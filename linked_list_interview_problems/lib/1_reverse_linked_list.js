@@ -65,31 +65,29 @@ function reverseLinkedList(linkedList) {
   if (linkedList.length <= 1) {
     return linkedList;
   }
+
+  if (linkedList.length === 2) {
+    linkedList.tail = linkedList.head;
+    linkedList.head = linkedList.head.next;
+    linkedList.head.next = linkedList.tail;
+    linkedList.tail.next = null;
+    return linkedList;
+  }
+
+  let i = 1;
   let firstNode = null;
   let snNode = linkedList.head;
   let tdNode = linkedList.head.next;
-  if (linkedList.length === 2) {
-    let head = linkedList.head;
-    let tail = linkedList.tail;
-    head.next = null;
-    tail.next = head;
-    linkedList.head = tail;
-    linkedList.tail = head;
-    return linkedList;
-  }
-  let i = 1;
-  while (i < linkedList.length - 1) {
-    if (i === 1) {
-      linkedList.tail = snNode;
+  linkedList.tail = snNode;
+  while (i < linkedList.length) {
+    if (i > 1) {
+      firstNode = snNode;
+      snNode = tdNode;
+      tdNode = tdNode.next;
     }
     snNode.next = firstNode;
-    firstNode = snNode;
-    snNode = tdNode;
-    tdNode = tdNode.next;
     i++;
   }
-
-  snNode.next = firstNode;
   tdNode.next = snNode;
   linkedList.head = tdNode;
   return linkedList;
