@@ -67,8 +67,7 @@ function reverseLinkedList(linkedList) {
   }
 
   if (linkedList.length === 2) {
-    linkedList.tail = linkedList.head;
-    linkedList.head = linkedList.head.next;
+    [linkedList.head, linkedList.tail] = [linkedList.tail, linkedList.head];
     linkedList.head.next = linkedList.tail;
     linkedList.tail.next = null;
     return linkedList;
