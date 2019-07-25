@@ -43,9 +43,6 @@ class Stack {
       popped = this.top;
       this.top = null;
       this.bottom = null;
-    } else if (this.length === 2) {
-      popped = this.top;
-      this.top = this.bottom;
     } else {
       popped = this.top;
       this.top = this.top.next;
