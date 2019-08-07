@@ -39,19 +39,33 @@ function lucasNumberMemo(n, memo = {}) {
 // minChange([1, 5, 10, 25], 15)    // => 2, because 10 + 5 = 15
 // minChange([1, 5, 10, 25], 100)   // => 4, because 25 + 25 + 25 + 25 = 100
 function minChange(coins, amount, memo = {}) {
-  if (coins.join + amount.toString() in memo) {
-    return memo[coins.join + amount.toString()];
-  }
+  let key = coins.join("") + "-" + amount;
+  if (key in memo) return memo[key];
   if (amount === 0) return 0;
-  if (amount < 0) return Infinity;
-  let result = [];
+  let result =;
   coins.forEach(coin => {
-    result.push(1 + minChange(coins, amount - coin, memo));
+    if (amount >= coin) {
+      result.push(1 + minChange(coins, amount - coin, memo));
+    }
   });
-  let a = Math.min(...result);
-  memo[coins.join + amount.toString()] = a;
-  return a;
+  let realone = Math.min(...result);
+  memo[key] = realone;
+  return realone;
 }
+
+
+
+function aa(str, key){
+  console.log(str, key)
+  if(key.length === 1 && key === str[0]) return true;
+  if(str.length === 1 && key!=str) return false;
+  if(str[0]===key[0]){
+    aa(str.slice(1), key.slice(1))
+  }else{
+    aa(str.slice(1), key)
+  }
+}
+
 
 module.exports = {
   lucasNumberMemo,

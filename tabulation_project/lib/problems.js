@@ -44,7 +44,18 @@ function stepper(nums, memo = {}) {
 //
 // maxNonAdjacentSum([2, 7, 9, 3, 4])   // => 15, because 2 + 9 + 4
 // maxNonAdjacentSum([4,2,1,6])         // => 10, because 4 + 6
-function maxNonAdjacentSum(nums) {}
+function maxNonAdjacentSum(nums) {
+  if (nums.length <= 0) return 0;
+  let table = new Array(nums.length).fill(0);
+  table[0] = nums[0];
+  for (let i = 1; i < nums.length; i++) {
+    let leftByTwo = table[i - 2] === undefined ? 0 : table[i - 2];
+    let leftByOne = table[i - 1];
+    table[i] = Math.max(leftByOne, leftByTwo + nums[i]);
+  }
+
+  return table[table.length - 1];
+}
 
 // Write a function, minChange(coins, amount), that accepts an array of coin values
 // and a target amount as arguments. The method should the minimum number of coins needed
