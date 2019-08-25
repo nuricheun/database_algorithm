@@ -84,17 +84,21 @@ function balancedParens(str) {
     ")": "("
   };
   let chars = str.split("");
-  chars.forEach(char => {
+
+  for (let i = 0; i < str.length; i++) {
+    let char = str[i];
     if (char in open) {
       result.push(char);
-      console.log(char);
     } else if (char in close) {
+      if (result.length === 0) {
+        return false;
+      }
       let popped = result.pop();
       if (popped !== close[char]) {
         return false;
       }
     }
-  });
+  }
   return result.length === 0;
 }
 
