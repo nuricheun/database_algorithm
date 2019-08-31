@@ -204,6 +204,7 @@ class List {
       node.delete();
     }
 
+
     // Don't delegate to push, since we want to keep the same
     // object.
 
